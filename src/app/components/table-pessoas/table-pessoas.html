@@ -1,0 +1,52 @@
+<div class="m-5 overflow-x-auto rounded-lg border border-gray-200 shadow-md">
+  <table class="w-full border-collapse bg-white text-left text-sm text-gray-500">
+    <thead class="bg-gray-50">
+      <tr>
+        <th scope="col" class="px-6 py-4 font-medium text-gray-900">Nome</th>
+        <th scope="col" class="px-6 py-4 font-medium text-gray-900">CPF</th>
+        <th scope="col" class="px-6 py-4 font-medium text-gray-900">Data de Nascimento</th>
+        <th scope="col" class="px-6 py-4 font-medium text-gray-900">Celular</th>
+        <th scope="col" class="w-14 font-medium text-gray-900"></th>
+      </tr>
+    </thead>
+    
+    <tbody class="divide-y divide-gray-100 border-t border-gray-100">
+      @for (pessoa of pessoas(); track pessoa.cpf) {
+        <tr class="hover:bg-gray-50">
+          <td class="px-6 py-4 font-normal text-gray-900">{{ pessoa.nome }}</td>
+          <td class="px-6 py-4">{{ formatarCpf(pessoa.cpf) }}</td>
+          <td class="px-6 py-4">{{ pessoa.data_nasc || '-' }}</td>
+          <td class="px-6 py-4">{{ pessoa.celular || '-' }}</td>
+          
+          <td class="relative px-6 py-4 text-center">
+            <button 
+              (click)="toggleMenu(pessoa.cpf)" 
+              class="rounded-full p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-600 focus:outline-none"
+            >
+              <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
+              </svg>
+            </button>
+
+            @if (menuAberto === pessoa.cpf) {
+              <app-table-menu [pessoaCpf]="pessoa.cpf" (aoFechar)="menuAberto = null"/>
+            }
+          </td>
+        </tr>
+      } @empty {
+        <tr>
+          <td colspan="5" class="px-6 py-8 text-center text-gray-500">
+            {{ loading() ? 'Carregando...' : 'Nenhuma pessoa encontrada.' }}
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+
+  <app-table-pagination 
+    [loading]="loading()" 
+    (carregar)="carregarDados()" 
+    [(paginaAtual)]="paginaAtual"
+    [(temMaisPaginas)]="temMaisPaginas"
+  />
+</div>
