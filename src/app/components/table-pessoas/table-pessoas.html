@@ -29,7 +29,7 @@
             </button>
 
             @if (menuAberto === pessoa.cpf) {
-              <app-table-menu [pessoaCpf]="pessoa.cpf" (aoFechar)="menuAberto = null"/>
+              <app-table-menu [pessoaCpf]="pessoa.cpf" (aoFechar)="menuAberto = null" (carregarDados)="carregarDados()"/>
             }
           </td>
         </tr>

@@ -1,0 +1,42 @@
+<div class="fixed inset-0 z-50 flex items-center justify-center bg-gray-900/50 p-4 backdrop-blur-xs transition-opacity">
+  
+  <div class="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+    
+    <div class="flex items-start gap-4">
+      <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-red-100 sm:h-10 sm:w-10">
+        <svg class="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+        </svg>
+      </div>
+      
+      <div class="mt-1 sm:mt-0">
+        <h3 class="text-lg font-medium leading-6 text-gray-900" id="modal-title">
+          {{ titulo() }}
+        </h3>
+        <div class="mt-2">
+          <p class="text-sm text-gray-500">
+            {{ mensagem() }}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-6 flex flex-col gap-3 sm:flex-row-reverse">
+      <button 
+        type="button" 
+        (click)="confirmar.emit()"
+        class="inline-flex w-full justify-center rounded-md bg-red-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto cursor-pointer"
+      >
+        Sim, excluir
+      </button>
+      <button 
+        type="button" 
+        (click)="cancelar.emit()"
+        class="inline-flex w-full justify-center rounded-md bg-white px-4 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto cursor-pointer"
+      >
+        Cancelar
+      </button>
+    </div>
+
+  </div>
+</div>
