@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { GithubIconComponent } from "../icons/github-icon/github-icon";
+import { GithubIconComponent } from "../icons/github-icon";
 
 @Component({
   selector: 'app-header',
