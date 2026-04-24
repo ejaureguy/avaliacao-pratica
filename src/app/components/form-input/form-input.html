@@ -1,0 +1,19 @@
+<div class="flex flex-col gap-1.5 col-span-full">
+  <label 
+    [for]="inputId()"
+    class="text-sm text-zinc-700"
+  >
+    {{ label() }}
+  </label>
+
+  <input 
+    [type]="inputType()" 
+    [id]="inputId()" 
+    [placeholder]="inputPlaceholder()"
+    [mask]="mask()"
+    [dropSpecialCharacters]="false"
+    [formControl]="control()"
+    (blur)="onBlur.emit()"
+    class="bg-zinc-100 rounded-md border border-zinc-300 py-1 px-3 placeholder:text-zinc-400 text-zinc-800"
+  >
+</div>

@@ -1,0 +1,19 @@
+<div class="flex flex-col gap-1.5 col-span-full">
+  <label 
+    [for]="inputId()"
+    class="text-sm text-zinc-700"
+  >
+    {{ label() }}
+  </label>
+
+  <select
+    [id]="inputId()" 
+    [formControl]="control()"
+    class="appearance-none bg-zinc-100 rounded-md border border-zinc-300 py-1 px-3 placeholder:text-zinc-400 text-zinc-800"
+  >
+    <option value="" selected>{{ selectPlaceholder() }}</option>
+    @for (option of options(); track $index) {
+      <option [value]="option" class="text-zinc-400">{{ option }}</option>
+    }
+  </select>
+</div>
