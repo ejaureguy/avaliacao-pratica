@@ -19,4 +19,10 @@
       <option [value]="option" class="text-zinc-400">{{ option }}</option>
     }
   </select>
+
+  @if (control().invalid && control().touched) {
+    <span class="text-xs text-red-500">
+      @if (control().hasError('required')) { Campo obrigatório. }
+    </span>
+  }
 </div>

@@ -16,4 +16,13 @@
     (blur)="onBlur.emit()"
     class="bg-zinc-100 rounded-md border border-zinc-300 py-1 px-3 placeholder:text-zinc-400 text-zinc-800"
   >
+  @if (control().invalid && control().touched) {
+    <span class="text-xs text-red-500">
+      @if (control().hasError('required')) { Campo obrigatório. }
+      @else if (control().hasError('minlength')) { Mínimo de {{ control().getError('minlength').requiredLength }} caracteres. }
+      @else if (control().hasError('maxlength')) { Máximo de {{ control().getError('maxlength').requiredLength }} caracteres. }
+      @else if (control().hasError('email')) { E-mail inválido. }
+      @else if (control().hasError('pattern')) { Formato inválido. }
+    </span>
+  }
 </div>

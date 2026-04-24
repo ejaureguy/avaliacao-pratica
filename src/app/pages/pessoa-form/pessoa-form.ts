@@ -32,6 +32,9 @@ export class PessoaForm implements OnInit {
   
   // Controla o passo atual
   passoAtual = signal(1)
+
+  // Controla o carregamento
+  isLoading = signal(false)
   
   // Criação do formulário e validações
   form: FormGroup = this.fb.group({
@@ -40,8 +43,8 @@ export class PessoaForm implements OnInit {
       cpf: ['', [Validators.required, Validators.pattern(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/)]],
       rg: ['', [Validators.required, Validators.minLength(3)]],
       data_nasc: ['', [Validators.required]],
-      mae: ['', [Validators.required]],
-      pai: ['', [Validators.required]],
+      mae: ['', [Validators.required, Validators.minLength(3)]],
+      pai: ['', [Validators.required, Validators.minLength(3)]],
       sexo: ['', [Validators.required]]
     }),
 
@@ -102,12 +105,30 @@ export class PessoaForm implements OnInit {
     })
   }
 
-  isLoading = signal(false)
+
+  // Lógica para melhorar a UX que vai pro step do erro de validaçãp
+  private passoParaGrupo: Record<number, string> = {
+    1: 'dadosPessoais',
+    2: 'caracteristicas',
+    3: 'contato',
+    4: 'endereco',
+    5: 'seguranca',
+  }
+
+  private irParaPrimeiroPassoComErro() {
+    for (const [passo, grupo] of Object.entries(this.passoParaGrupo)) {
+      if (this.form.get(grupo)?.invalid) {
+        this.passoAtual.set(Number(passo))
+        return
+      }
+    }
+  }
   
   // Salva o cadastro com base se é uma criação nova ou uma edição
   salvar() {
     if (this.form.invalid) {
       this.form.markAllAsTouched()
+      this.irParaPrimeiroPassoComErro()
       return
     }
 
