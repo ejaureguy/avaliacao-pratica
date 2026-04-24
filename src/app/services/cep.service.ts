@@ -1,19 +1,19 @@
-import { inject, Injectable } from '@angular/core';
-import { environment } from '../../environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core'
+import { environment } from '../../environments/environment'
+import { HttpClient } from '@angular/common/http'
 
 interface EnderecoResponse {
-  cep: string;
-  logradouro: string;
-  complemento: string;
-  bairro: string;
-  localidade: string;
-  uf: string;
-  ibge: string;
-  gia: string;
-  ddd: string;
-  siafi: string;
-  erro?: boolean;
+  cep: string
+  logradouro: string
+  complemento: string
+  bairro: string
+  localidade: string
+  uf: string
+  ibge: string
+  gia: string
+  ddd: string
+  siafi: string
+  erro?: boolean
 }
 
 @Injectable({
