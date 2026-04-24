@@ -1,59 +1,78 @@
-# EstagioTre
+# Avaliação Prática — Estágio TRE-RR
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.7.
+Aplicação Angular para cadastro, visualização e edição de pessoas, com formulário multi-etapas e integração com ViaCEP para autocomplete dos campos de endereço.
 
-## Development server
+***
 
-To start a local development server, run:
+## 🐳 Rodar com Docker (recomendado)
 
-```bash
-ng serve
-```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+**Pré-requisitos:** [Docker](https://www.docker.com/get-started) instalado.
 
 ```bash
-ng generate component component-name
+# 1. Clone o repositório
+git clone <url-do-repositorio>
+cd avalicao-pratica
+
+# 2. Suba o container
+docker compose up --build
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Acesse em: **[http://localhost:4200](http://localhost:4200)**
+
+Para parar:
+```bash
+docker compose down
+```
+
+***
+
+## 💻 Rodar localmente (sem Docker)
+
+**Pré-requisitos:** [Node.js 22+](https://nodejs.org/) instalado.
 
 ```bash
-ng generate --help
+# 1. Clone o repositório
+git clone <url-do-repositorio>
+cd avaliacao-pratica
+
+# 2. Instale as dependências
+npm install
+
+# 3. Inicie o servidor de desenvolvimento
+npm start
 ```
 
-## Building
+Acesse em: **[http://localhost:4200](http://localhost:4200)**
 
-To build the project run:
+***
 
-```bash
-ng build
-```
+## ⚙️ Variáveis de Ambiente
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+As configurações da API ficam nos arquivos `src/environments/`:
 
-## Running unit tests
+| Arquivo | Uso |
+|---|---|
+| `environment.ts` | Desenvolvimento |
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+***
 
-```bash
-ng test
-```
+## 🗂️ Funcionalidades
 
-## Running end-to-end tests
+- Cadastro de pessoas em formulário multi-etapas (5 passos)
+- Busca automática de endereço pelo CEP (ViaCEP)
+- Listagem paginada de cadastros
+- Visualização de detalhes
+- Edição de cadastros existentes
+- Exclusão com confirmação
+- Validação de formulário com mensagens de erro
+- Feedback visual com toasts
 
-For end-to-end (e2e) testing, run:
+***
 
-```bash
-ng e2e
-```
+## 🛠️ Tecnologias
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- [Angular 21](https://angular.io/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [ngx-mask](https://github.com/JsDaddy/ngx-mask)
+- [ViaCEP](https://viacep.com.br/)
+- [Docker](https://www.docker.com/) + [Nginx](https://nginx.org/)
