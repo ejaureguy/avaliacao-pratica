@@ -1,7 +1,9 @@
 <main class="flex flex-col items-center mt-24">
   <form [formGroup]="form" class="bg-white w-[80%] max-w-188 rounded-md py-4 px-6 flex flex-col gap-4">
     <div class="flex justify-between items-center">
-      <h1 class="text-2xl font-extrabold text-zinc-600 mb-4">Cadastrar Pessoa</h1>
+      <h1 class="text-2xl font-extrabold text-zinc-600 mb-4">
+        {{ isNovo ? 'Cadastrar Pessoa' : modoEdicao() ? 'Editar Pessoa' : 'Detalhes da Pessoa' }}
+      </h1>
       <a routerLink="/" class="flex items-center gap-2 text-sm bg-zinc-200 py-1 px-2 rounded-md">
         <app-home-icon />
         Página Inicial
@@ -44,7 +46,7 @@
           />
           <app-select-form 
             inputId="sexo"
-            label="Data de Nascimento"
+            label="Sexo"
             selectPlaceholder="Selecione"
             [control]="$any(form.get('dadosPessoais.sexo'))"
             [options]="['Feminino', 'Masculino']"
@@ -229,35 +231,43 @@
         </div>
       }
     }
-    <div class="flex justify-between gap-4 mt-8">
-      @if(passoAtual() == 1) {
+
+    
+    <div class="flex justify-between items-center gap-4 mt-8">
+      @if (passoAtual() == 1) {
         <span></span>
       } @else {
-        <button 
-          type="button" 
-          (click)="prevStep()" 
-          [disabled]="passoAtual() === 1"
-          class="px-4 py-2 bg-gray-300 rounded disabled:opacity-50 cursor-pointer hover:bg-zinc-200 duration-200">
+        <button type="button" (click)="prevStep()" class="px-4 py-2 bg-gray-200 rounded cursor-pointer">
           Voltar
         </button>
       }
+      <div class="flex items-center gap-2">
+        @if (podeEditar) {
+          <button
+            type="button"
+            (click)="ativarEdicao()"
+            class="px-4 py-2 bg-yellow-500 hover:bg-yellow-500 text-white font-medium rounded cursor-pointer">
+            Editar
+          </button>
+        }
 
-      @if (passoAtual() == 5) {
-      <button 
-        type="button"
-        (click)="salvar()"
-        class="px-4 py-2 bg-blue-500 text-white rounded disabled:opacity-50 cursor-pointer hover:bg-blue-400 duration-200">
-        Salvar
-      </button>
-      } @else {
-        <button 
-          type="button" 
-          (click)="nextStep()" 
-          [disabled]="passoAtual() === 5"
-          class="px-4 py-2 bg-blue-500 text-white rounded disabled:opacity-50 cursor-pointer hover:bg-blue-400 duration-200">
-          Avançar
-        </button>
-      }
+        @if (passoAtual() == 5) {
+          @if (modoEdicao()) {
+            <button type="button" (click)="cancelarEdicao()" class="px-4 py-2 bg-gray-200 rounded cursor-pointer">
+              Cancelar
+            </button>
+          }
+          @if (isNovo || modoEdicao()) {
+            <button type="button" (click)="salvar()" class="px-4 py-2 bg-blue-500 text-white rounded cursor-pointer">
+              Salvar
+            </button>
+          }
+        } @else {
+          <button type="button" (click)="nextStep()" class="px-4 py-2 bg-blue-500 text-white rounded cursor-pointer">
+            Avançar
+          </button>
+        }
+      </div>
     </div>
 
   </form>

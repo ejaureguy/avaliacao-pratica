@@ -10,5 +10,9 @@ export const routes: Routes = [
   {
     path: 'pessoas/criar',
     component: PessoaForm
+  },
+  {
+    path: 'pessoas/:cpf',
+    component: PessoaForm
   }
 ];
