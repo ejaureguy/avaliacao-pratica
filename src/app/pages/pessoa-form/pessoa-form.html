@@ -1,5 +1,5 @@
 <main class="flex flex-col items-center mt-24">
-  <form [formGroup]="form" class="bg-white w-[80%] max-w-188 rounded-md py-4 px-6 flex flex-col gap-4">
+  <form [formGroup]="form"  class="bg-white w-[80%] max-w-188 rounded-md py-4 px-6 flex flex-col gap-4">
     <div class="flex justify-between items-center">
       <h1 class="text-2xl font-extrabold text-zinc-600 mb-4">
         {{ isNovo ? 'Cadastrar Pessoa' : modoEdicao() ? 'Editar Pessoa' : 'Detalhes da Pessoa' }}
@@ -9,228 +9,226 @@
         Página Inicial
       </a>
     </div>
-    @switch (passoAtual()) {
-      @case (1) {
-        <h2 class="text-xl font-bold text-zinc-500">Dados Pessoais</h2>
-        <div class="grid grid-cols-2 gap-3">
-          <app-form-input 
-            inputId="nome"
-            label="Nome Completo" 
-            inputPlaceholder="Digite seu nome completo" 
-            inputType="text" 
-            class="col-span-full"
-            [control]="$any(form.get('dadosPessoais.nome'))"
-          />
-          <app-form-input 
-            inputId="cpf"
-            label="CPF" 
-            inputPlaceholder="Digite seu CPF" 
-            inputType="text"
-            mask="000.000.000-00"
-            [control]="$any(form.get('dadosPessoais.cpf'))"
-          />
-          <app-form-input 
-            inputId="rg"
-            label="RG" 
-            inputPlaceholder="Digite seu RG" 
-            inputType="text" 
-            [control]="$any(form.get('dadosPessoais.rg'))"
-          />
-          <app-form-input 
-            inputId="data_nasc"
-            label="Data de Nascimento" 
-            inputPlaceholder="Digite sua data de nascimento" 
-            inputType="text"
-            mask="d0/M0/0000"
-            [control]="$any(form.get('dadosPessoais.data_nasc'))"
-          />
-          <app-select-form 
-            inputId="sexo"
-            label="Sexo"
-            selectPlaceholder="Selecione"
-            [control]="$any(form.get('dadosPessoais.sexo'))"
-            [options]="['Feminino', 'Masculino']"
-          />
-          <app-form-input 
-            inputId="mae"
-            label="Nome da Mãe" 
-            inputPlaceholder="Digite o nome da sua mãe" 
-            inputType="text" 
-            class="col-span-full"
-            [control]="$any(form.get('dadosPessoais.mae'))"
-          />
-          <app-form-input 
-            inputId="pai"
-            label="Nome do Pai" 
-            inputPlaceholder="Digite o nome do seu pai" 
-            inputType="text" 
-            class="col-span-full"
-            [control]="$any(form.get('dadosPessoais.pai'))"
-          />
-        </div>
+    <div [class.pointer-events-none]="form.disabled">
+      @switch (passoAtual()) {
+        @case (1) {
+          <h2 class="text-xl font-bold text-zinc-500">Dados Pessoais</h2>
+          <div class="grid grid-cols-2 gap-3">
+            <app-form-input
+              inputId="nome"
+              label="Nome Completo"
+              inputPlaceholder="Digite seu nome completo"
+              inputType="text"
+              class="col-span-full"
+              [control]="$any(form.get('dadosPessoais.nome'))"
+            />
+            <app-form-input
+              inputId="cpf"
+              label="CPF"
+              inputPlaceholder="Digite seu CPF"
+              inputType="text"
+              mask="000.000.000-00"
+              [control]="$any(form.get('dadosPessoais.cpf'))"
+            />
+            <app-form-input
+              inputId="rg"
+              label="RG"
+              inputPlaceholder="Digite seu RG"
+              inputType="text"
+              [control]="$any(form.get('dadosPessoais.rg'))"
+            />
+            <app-form-input
+              inputId="data_nasc"
+              label="Data de Nascimento"
+              inputPlaceholder="Digite sua data de nascimento"
+              inputType="text"
+              mask="d0/M0/0000"
+              [control]="$any(form.get('dadosPessoais.data_nasc'))"
+            />
+            <app-select-form
+              inputId="sexo"
+              label="Sexo"
+              selectPlaceholder="Selecione"
+              [control]="$any(form.get('dadosPessoais.sexo'))"
+              [options]="['Feminino', 'Masculino']"
+            />
+            <app-form-input
+              inputId="mae"
+              label="Nome da Mãe"
+              inputPlaceholder="Digite o nome da sua mãe"
+              inputType="text"
+              class="col-span-full"
+              [control]="$any(form.get('dadosPessoais.mae'))"
+            />
+            <app-form-input
+              inputId="pai"
+              label="Nome do Pai"
+              inputPlaceholder="Digite o nome do seu pai"
+              inputType="text"
+              class="col-span-full"
+              [control]="$any(form.get('dadosPessoais.pai'))"
+            />
+          </div>
+        }
+        @case (2) {
+          <h2 class="text-xl font-bold text-zinc-500">Características</h2>
+          <div class="grid grid-cols-2 gap-3">
+            <app-form-input
+              inputId="idade"
+              label="Idade"
+              inputPlaceholder="Digite a sua idade"
+              inputType="text"
+              mask="0*"
+              [control]="$any(form.get('caracteristicas.idade'))"
+            />
+            <app-select-form
+              inputId="signo"
+              label="Signo"
+              selectPlaceholder="Selecione"
+              [control]="$any(form.get('caracteristicas.signo'))"
+              [options]="['Áries', 'Touro', 'Gêmeos', 'Câncer', 'Leão', 'Virgem', 'Libra', 'Escorpião', 'Sagitário', 'Capricórnio', 'Aquário', 'Peixes']"
+            />
+            <app-form-input
+              inputId="altura"
+              label="Altura"
+              inputPlaceholder="Digite a sua altura"
+              inputType="text"
+              mask="0,00"
+              [control]="$any(form.get('caracteristicas.altura'))"
+            />
+            <app-select-form
+              inputId="tipo_sanguineo"
+              label="Tipo Sanguíneo"
+              selectPlaceholder="Selecione"
+              [control]="$any(form.get('caracteristicas.tipo_sanguineo'))"
+              [options]="['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-']"
+            />
+            <app-form-input
+              inputId="peso"
+              label="Peso"
+              inputPlaceholder="Digite o seu peso"
+              inputType="text"
+              mask="00.00"
+              [control]="$any(form.get('caracteristicas.peso'))"
+            />
+            <app-select-form
+              inputId="cor"
+              label="Cor"
+              selectPlaceholder="Selecione"
+              [control]="$any(form.get('caracteristicas.cor'))"
+              [options]="['Branco', 'Preto', 'Amarelo', 'Pardo', 'Indígena']"
+            />
+          </div>
+        }
+        @case (3) {
+          <h2 class="text-xl font-bold text-zinc-500">Contato</h2>
+          <div class="grid grid-cols-2 gap-3">
+            <app-form-input
+              inputId="email"
+              label="Email"
+              inputPlaceholder="Digite o seu email"
+              inputType="email"
+              class="col-span-full"
+              [control]="$any(form.get('contato.email'))"
+            />
+            <app-form-input
+              inputId="celular"
+              label="Celular"
+              inputPlaceholder="Digite seu número de celular"
+              inputType="text"
+              mask="(00) 00000-0000"
+              [control]="$any(form.get('contato.celular'))"
+            />
+            <app-form-input
+              inputId="telefone_fixo"
+              label="Telefone Fixo"
+              inputPlaceholder="Digite o número do seu telefone fixo"
+              inputType="text"
+              mask="(00) 0000-0000"
+              [control]="$any(form.get('contato.telefone_fixo'))"
+            />
+          </div>
+        }
+        @case (4) {
+          <h2 class="text-xl font-bold text-zinc-500">Endereço</h2>
+          <div class="grid grid-cols-6 gap-3">
+            <app-form-input
+              inputId="cep"
+              label="CEP"
+              inputPlaceholder="Digite seu CEP"
+              inputType="text"
+              mask="00000-000"
+              (onBlur)="pegarEndereco()"
+              [control]="$any(form.get('endereco.cep'))"
+              class="col-span-2"
+            />
+            <app-form-input
+              inputId="cidade"
+              label="Cidade"
+              inputPlaceholder="Digite sua cidade"
+              inputType="text"
+              [control]="$any(form.get('endereco.cidade'))"
+              class="col-span-3"
+            />
+            <app-select-form
+              inputId="estado"
+              label="Estado"
+              selectPlaceholder="Selecione"
+              [control]="$any(form.get('endereco.estado'))"
+              class="col-span-1"
+              [options]="['AC', 'AL', 'AM', 'AP', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MG', 'MS', 'MT', 'PA', 'PB', 'PE', 'PI', 'PR', 'RJ', 'RN', 'RO', 'RR', 'RS', 'SC', 'SE', 'SP', 'TO']"
+            />
+            <app-form-input
+              inputId="endereco"
+              label="Endereço"
+              inputPlaceholder="Digite seu endereço"
+              inputType="text"
+              [control]="$any(form.get('endereco.endereco'))"
+              class="col-span-3"
+            />
+            <app-form-input
+              inputId="numero"
+              label="Número"
+              inputPlaceholder="N°"
+              inputType="text"
+              [control]="$any(form.get('endereco.numero'))"
+              mask="0*"
+              class="col-span-1"
+            />
+            <app-form-input
+              inputId="bairro"
+              label="Bairro"
+              inputPlaceholder="Digite seu bairro"
+              inputType="text"
+              [control]="$any(form.get('endereco.bairro'))"
+              class="col-span-2"
+            />
+          </div>
+        }
+        @case (5) {
+          <h2 class="text-xl font-bold text-zinc-500">Segurança</h2>
+          <div class="grid grid-cols-2 gap-3">
+            <app-form-input
+              inputId="senha"
+              label="Senha"
+              inputPlaceholder="Digite sua senha"
+              inputType="password"
+              [control]="$any(form.get('seguranca.senha'))"
+            />
+            <app-form-input
+              inputId="confirmaSenha"
+              label="Confirmar Senha"
+              inputPlaceholder="Confirme sua senha"
+              inputType="password"
+              [control]="$any(form.get('seguranca.confirmaSenha'))"
+            />
+          </div>
+          <div class="text-xs text-zinc-600">
+            <p>OBS: Por ser um ambiente de exemplo, a senha é enviada em texto puro. Não digite uma senha verdadeira.</p>
+          </div>
+        }
       }
-
-      @case (2) {
-        <h2 class="text-xl font-bold text-zinc-500">Características</h2>
-        <div class="grid grid-cols-2 gap-3">
-          <app-form-input
-            inputId="idade"
-            label="Idade"
-            inputPlaceholder="Digite a sua idade"
-            inputType="text"
-            mask="0*"
-            [control]="$any(form.get('caracteristicas.idade'))"
-          />
-          <app-select-form
-            inputId="signo"
-            label="Signo"
-            selectPlaceholder="Selecione"
-            [control]="$any(form.get('caracteristicas.signo'))"
-            [options]="['Áries', 'Touro', 'Gêmeos', 'Câncer', 'Leão', 'Virgem', 'Libra', 'Escorpião', 'Sagitário', 'Capricórnio', 'Aquário', 'Peixes']"
-          />
-          <app-form-input
-            inputId="altura"
-            label="Altura"
-            inputPlaceholder="Digite a sua altura"
-            inputType="text"
-            mask="0,00"
-            [control]="$any(form.get('caracteristicas.altura'))"
-          />
-          <app-select-form
-            inputId="tipo_sanguineo"
-            label="Tipo Sanguíneo"
-            selectPlaceholder="Selecione"
-            [control]="$any(form.get('caracteristicas.tipo_sanguineo'))"
-            [options]="['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-']"
-          />
-          <app-form-input
-            inputId="peso"
-            label="Peso"
-            inputPlaceholder="Digite o seu peso"
-            inputType="text"
-            mask="00.00"
-            [control]="$any(form.get('caracteristicas.peso'))"
-          />
-          <app-select-form
-            inputId="cor"
-            label="Cor"
-            selectPlaceholder="Selecione"
-            [control]="$any(form.get('caracteristicas.cor'))"
-            [options]="['Branco', 'Preto', 'Amarelo', 'Pardo', 'Indígena']"
-          />
-        </div>
-      }
-
-      @case (3) {
-        <h2 class="text-xl font-bold text-zinc-500">Contato</h2>
-        <div class="grid grid-cols-2 gap-3">
-          <app-form-input 
-            inputId="email"
-            label="Email" 
-            inputPlaceholder="Digite o seu email" 
-            inputType="email" 
-            class="col-span-full"
-            [control]="$any(form.get('contato.email'))"
-          />
-          <app-form-input 
-            inputId="celular"
-            label="Celular" 
-            inputPlaceholder="Digite seu número de celular" 
-            inputType="text" 
-            mask="(00) 00000-0000"
-            [control]="$any(form.get('contato.celular'))"
-          />
-          <app-form-input 
-            inputId="telefone_fixo"
-            label="Telefone Fixo" 
-            inputPlaceholder="Digite o número do seu telefone fixo" 
-            inputType="text" 
-            mask="(00) 0000-0000"
-            [control]="$any(form.get('contato.telefone_fixo'))"
-          />
-        </div>
-      }
-
-      @case (4) {
-        <h2 class="text-xl font-bold text-zinc-500">Endereço</h2>
-        <div class="grid grid-cols-6 gap-3">
-          <app-form-input 
-            inputId="cep"
-            label="CEP" 
-            inputPlaceholder="Digite seu CEP" 
-            inputType="text" 
-            mask="00000-000"
-            (onBlur)="pegarEndereco()"
-            [control]="$any(form.get('endereco.cep'))"
-            class="col-span-2"
-          />
-          <app-form-input 
-            inputId="cidade"
-            label="Cidade" 
-            inputPlaceholder="Digite sua cidade" 
-            inputType="text" 
-            [control]="$any(form.get('endereco.cidade'))"
-            class="col-span-3"
-          />
-          <app-select-form
-            inputId="estado"
-            label="Estado"
-            selectPlaceholder="Selecione"
-            [control]="$any(form.get('endereco.estado'))"
-            class="col-span-1"
-            [options]="['AC', 'AL', 'AM', 'AP', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MG', 'MS', 'MT', 'PA', 'PB', 'PE', 'PI', 'PR', 'RJ', 'RN', 'RO', 'RR', 'RS', 'SC', 'SE', 'SP', 'TO']"
-          />
-          <app-form-input 
-            inputId="endereco"
-            label="Endereço" 
-            inputPlaceholder="Digite seu endereço" 
-            inputType="text" 
-            [control]="$any(form.get('endereco.endereco'))"
-            class="col-span-3"
-          />
-          <app-form-input 
-            inputId="numero"
-            label="Número" 
-            inputPlaceholder="N°" 
-            inputType="text" 
-            [control]="$any(form.get('endereco.numero'))"
-            mask="0*"
-            class="col-span-1"
-          />
-          <app-form-input 
-            inputId="bairro"
-            label="Bairro" 
-            inputPlaceholder="Digite seu bairro" 
-            inputType="text" 
-            [control]="$any(form.get('endereco.bairro'))"
-            class="col-span-2"
-          />
-        </div>
-      }
-
-      @case (5) {
-        <h2 class="text-xl font-bold text-zinc-500">Segurança</h2>
-        <div class="grid grid-cols-2 gap-3">
-          <app-form-input 
-            inputId="senha"
-            label="Senha" 
-            inputPlaceholder="Digite sua senha" 
-            inputType="password" 
-            [control]="$any(form.get('seguranca.senha'))"
-          />
-          <app-form-input 
-            inputId="confirmaSenha"
-            label="Confirmar Senha" 
-            inputPlaceholder="Confirme sua senha" 
-            inputType="password" 
-            [control]="$any(form.get('seguranca.confirmaSenha'))"
-          />
-        </div>
-        <div class="text-xs text-zinc-600">
-          <p>OBS: Por ser um ambiente de exemplo, a senha é enviada em texto puro. Não digite uma senha verdadeira.</p>
-        </div>
-      }
-    }
+    </div>
 
     
     <div class="flex justify-between items-center gap-4 mt-8">
