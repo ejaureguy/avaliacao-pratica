@@ -228,13 +228,15 @@ export class PessoaForm implements OnInit {
     this.modoEdicao.set(true)
     this.form.enable()
     this.form.get('dadosPessoais.cpf')?.disable()
-    this.form.get('seguranca.senha')?.disable()
-    this.form.get('seguranca.confirmaSenha')?.disable()
   }
 
   cancelarEdicao() {
     this.modoEdicao.set(false)
     this.form.disable()
     this.carregarPessoa(this.cpfAtual()!)
+    this.form.get('seguranca.senha')?.setValidators([Validators.required])
+    this.form.get('seguranca.senha')?.updateValueAndValidity()
+    this.form.get('seguranca.confirmaSenha')?.setValidators([Validators.required])
+    this.form.get('seguranca.confirmaSenha')?.updateValueAndValidity()
   }
 }

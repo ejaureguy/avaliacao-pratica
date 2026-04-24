@@ -206,26 +206,31 @@
           </div>
         }
         @case (5) {
-          <h2 class="text-xl font-bold text-zinc-500">Segurança</h2>
-          <div class="grid grid-cols-2 gap-3">
-            <app-form-input
-              inputId="senha"
-              label="Senha"
-              inputPlaceholder="Digite sua senha"
-              inputType="password"
-              [control]="$any(form.get('seguranca.senha'))"
-            />
-            <app-form-input
-              inputId="confirmaSenha"
-              label="Confirmar Senha"
-              inputPlaceholder="Confirme sua senha"
-              inputType="password"
-              [control]="$any(form.get('seguranca.confirmaSenha'))"
-            />
-          </div>
-          <div class="text-xs text-zinc-600">
-            <p>OBS: Por ser um ambiente de exemplo, a senha é enviada em texto puro. Não digite uma senha verdadeira.</p>
-          </div>
+          @if (podeEditar) {
+            <p class="text-sm text-zinc-500 bg-zinc-100 rounded-md px-4 py-3">
+              Senha cadastrada. Clique em <strong>Editar</strong> para alterá-la.
+            </p>
+          } @else {
+            <div class="grid grid-cols-2 gap-3">
+              <app-form-input
+                inputId="senha"
+                label="Senha"
+                inputPlaceholder="Digite sua senha"
+                inputType="password"
+                [control]="$any(form.get('seguranca.senha'))"
+              />
+              <app-form-input
+                inputId="confirmaSenha"
+                label="Confirmar Senha"
+                inputPlaceholder="Confirme sua senha"
+                inputType="password"
+                [control]="$any(form.get('seguranca.confirmaSenha'))"
+              />
+            </div>
+            <div class="text-xs text-zinc-600">
+              <p>OBS: Por ser um ambiente de exemplo, a senha é enviada em texto puro. Não digite uma senha verdadeira.</p>
+            </div>
+          }
         }
       }
     </div>
