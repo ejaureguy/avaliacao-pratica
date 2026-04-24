@@ -4,6 +4,14 @@ Aplicação Angular para cadastro, visualização e edição de pessoas, com for
 
 ***
 
+## 🌐 Acesso Rápido
+
+> **A aplicação já está disponível online** — sem necessidade de instalar nada:
+>
+> 👉 **[estagio.luiseduardo.dev](https://estagio.luiseduardo.dev)**
+
+***
+
 ## 🐳 Rodar com Docker (recomendado)
 
 **Pré-requisitos:** [Docker](https://www.docker.com/get-started) instalado.
