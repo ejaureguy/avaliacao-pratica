@@ -32,6 +32,7 @@ export class TablePessoas {
     this.pessoaService.listar(offset).subscribe({
       next: (res) => {
         this.pessoas.set(res.items)
+        this.temMaisPaginas.set(res.hasMore)
         this.loading.set(false)
       },
       error: () => this.loading.set(false)
