@@ -6,7 +6,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "estagio-tre": {
+    "avalicao-pratica": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -56,10 +56,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "estagio-tre:build:production"
+              "buildTarget": "avaliacao-pratica:build:production"
             },
             "development": {
-              "buildTarget": "estagio-tre:build:development"
+              "buildTarget": "avaliacao-pratica:build:development"
             }
           },
           "defaultConfiguration": "development"
