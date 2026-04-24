@@ -1,6 +1,12 @@
 <main class="flex flex-col items-center mt-24">
   <form [formGroup]="form" class="bg-white w-[80%] max-w-188 rounded-md py-4 px-6 flex flex-col gap-4">
-    <h1 class="text-2xl font-extrabold text-zinc-600 mb-4">Cadastrar Pessoa</h1>
+    <div class="flex justify-between items-center">
+      <h1 class="text-2xl font-extrabold text-zinc-600 mb-4">Cadastrar Pessoa</h1>
+      <a routerLink="/" class="flex items-center gap-2 text-sm bg-zinc-200 py-1 px-2 rounded-md">
+        <app-home-icon />
+        Página Inicial
+      </a>
+    </div>
     @switch (passoAtual()) {
       @case (1) {
         <h2 class="text-xl font-bold text-zinc-500">Dados Pessoais</h2>
