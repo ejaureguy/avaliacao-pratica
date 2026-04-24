@@ -8,6 +8,7 @@ import { PessoaService } from '../../services/pessoa.service';
 import { Pessoa } from '../../models/pessoa.model';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { HomeIcon } from "../../components/icons/home-icon";
+import { ToastService } from '../../services/toast.service';
 
 @Component({
   selector: 'app-pessoa-form',
@@ -21,6 +22,8 @@ export class PessoaForm implements OnInit {
   private pessoaService = inject(PessoaService)
   private route = inject(ActivatedRoute)
   private router = inject(Router)
+
+  private toastService = inject(ToastService)
   
   modoEdicao = signal(false)
   cpfAtual = signal<string | null>(null)
@@ -129,12 +132,12 @@ export class PessoaForm implements OnInit {
         this.isLoading.set(false)
         this.modoEdicao.set(false)
         this.form.disable()
-        alert(this.isNovo ? 'Cadastro criado!' : 'Cadastro atualizado!')
-        if (this.isNovo) this.router.navigate(['/pessoas'])
+        this.toastService.mostrar(`${this.isNovo ? 'Cadastro criado!' : 'Cadastro atualizado!'}`, 'sucesso')
+        if (this.isNovo) this.router.navigate(['/'])
       },
       error: () => {
         this.isLoading.set(false)
-        alert('Ocorreu um erro ao salvar.')
+        this.toastService.mostrar('Ocorreu um erro ao salvar.', 'erro')
       }
     })
   }
@@ -189,8 +192,8 @@ export class PessoaForm implements OnInit {
       },
       error: () => {
         this.isLoading.set(false)
-        alert('Pessoa não encontrada.')
-        this.router.navigate(['/pessoas'])
+        this.toastService.mostrar('Pessoa não encontrada.', 'erro')
+        this.router.navigate(['/'])
       }
     })
   }
