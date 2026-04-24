@@ -1,14 +1,14 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core'
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
-import { FormInput } from "../../components/form-input/form-input";
-import { SelectForm } from "../../components/select-form/select-form";
-import { CepService } from '../../services/cep.service';
-import { confirmarSenhaValidator } from '../../validators/confirmar-senha.validator';
-import { PessoaService } from '../../services/pessoa.service';
-import { Pessoa } from '../../models/pessoa.model';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { HomeIcon } from "../../components/icons/home-icon";
-import { ToastService } from '../../services/toast.service';
+import { FormInput } from "../../components/form-input/form-input"
+import { SelectForm } from "../../components/select-form/select-form"
+import { CepService } from '../../services/cep.service'
+import { confirmarSenhaValidator } from '../../validators/confirmar-senha.validator'
+import { PessoaService } from '../../services/pessoa.service'
+import { Pessoa } from '../../models/pessoa.model'
+import { ActivatedRoute, Router, RouterLink } from '@angular/router'
+import { HomeIcon } from "../../components/icons/home-icon"
+import { ToastService } from '../../services/toast.service'
 
 @Component({
   selector: 'app-pessoa-form',
@@ -22,7 +22,6 @@ export class PessoaForm implements OnInit {
   private pessoaService = inject(PessoaService)
   private route = inject(ActivatedRoute)
   private router = inject(Router)
-
   private toastService = inject(ToastService)
   
   modoEdicao = signal(false)
@@ -34,6 +33,7 @@ export class PessoaForm implements OnInit {
   // Controla o passo atual
   passoAtual = signal(1)
   
+  // Criação do formulário e validações
   form: FormGroup = this.fb.group({
     dadosPessoais: this.fb.group({
       nome: ['', [Validators.required, Validators.minLength(3)]],
@@ -77,13 +77,14 @@ export class PessoaForm implements OnInit {
   
   // Navegação
   nextStep() {
-    this.passoAtual.update(s => s + 1);
+    this.passoAtual.update(s => s + 1)
   }
   
   prevStep() {
-    this.passoAtual.update(s => s - 1);
+    this.passoAtual.update(s => s - 1)
   }
   
+  // Pega o endereço para autocompletar os campos
   pegarEndereco() {
     const cep = this.form.get('endereco.cep')?.value
     if (!cep) return
@@ -103,6 +104,7 @@ export class PessoaForm implements OnInit {
 
   isLoading = signal(false)
   
+  // Salva o cadastro com base se é uma criação nova ou uma edição
   salvar() {
     if (this.form.invalid) {
       this.form.markAllAsTouched()
@@ -142,6 +144,7 @@ export class PessoaForm implements OnInit {
     })
   }
 
+  // Carrega o CPF atual e decide se o formulário vai ser de criação ou edição
   ngOnInit() {
     const cpf = this.route.snapshot.paramMap.get('cpf')
 
@@ -151,6 +154,7 @@ export class PessoaForm implements OnInit {
     }
   }
 
+  // Preenche os campos com as informações da pessoa selecionada
   carregarPessoa(cpf: string) {
     this.isLoading.set(true)
     this.pessoaService.buscarPorCpf(cpf).subscribe({
@@ -198,6 +202,7 @@ export class PessoaForm implements OnInit {
     })
   }
 
+  // Ativa o modo edição e habilita os inputs
   ativarEdicao() {
     this.modoEdicao.set(true)
     this.form.enable()
